@@ -5,7 +5,8 @@ h2,
 h3,
 p,
 span,
-a {
+a,
+li {
   font-family: 'Lato', sans-serif;
   color: #666;
 }
@@ -94,6 +95,21 @@ h1 {
 
 .Content-info-bold {
   font-weight: 900;
+}
+
+.Content-section-headline {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.Content-section-subtitle {
+  color: #e0dede;
+}
+
+.Content-section-list {
+  list-style: disc;
+  padding-left: 30px;
 }
 
 /***********************************************************************/

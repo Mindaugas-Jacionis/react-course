@@ -65,7 +65,41 @@ function App() {
               </p>
             </div>
           </section>
-          {/* TODO: Experience */}
+          <section className="Content-section">
+            <div className="Content-section-title">
+              <h3>Experience</h3>
+            </div>
+            <div className="Content-section-description">
+              <div className="Content-description-container">
+                <div className="Content-section-headline">
+                  <h3>Tesonet</h3>
+                  <p className="Content-section-subtitle">
+                    Sr.Frontend Engineer, 2017.08 - present
+                  </p>
+                </div>
+                <ul className="Content-section-list">
+                  <li>Code - do some coding with JavaScript</li>
+                  <li>Eat - whatever I found in the kitchen</li>
+                  <li>Sleep - at my desk</li>
+                  <li>Repeat - again and agian and...</li>
+                </ul>
+              </div>
+              <div className="Content-description-container">
+                <div className="Content-section-headline">
+                  <h3>Tesonet</h3>
+                  <p className="Content-section-subtitle">
+                    Sr.Frontend Engineer, 2017.08 - present
+                  </p>
+                </div>
+                <ul className="Content-section-list">
+                  <li>Code - do some coding with JavaScript</li>
+                  <li>Eat - whatever I found in the kitchen</li>
+                  <li>Sleep - at my desk</li>
+                  <li>Repeat - again and agian and...</li>
+                </ul>
+              </div>
+            </div>
+          </section>
           <section className="Content-section">
             <div className="Content-section-title">
               <h3>Hobies</h3>
@@ -107,7 +141,13 @@ function App() {
         <a href="tel:+37069999999" target="_blank" rel="noopener noreferrer">
           <Icon name="phone" />
         </a>
-        {/* TODO: Add github link icon here */}
+        <a
+          href="https://github.com/mindaugas-jacionis"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Icon name="github" />
+        </a>
       </footer>
     </div>
   );
