@@ -1,0 +1,32 @@
+.Header {
+  padding: 40px 0px;
+  position: relative;
+}
+
+.Header-image {
+  max-width: 150px;
+  position: absolute;
+  right: 40px;
+  top: 40px;
+  transform: rotate(-5deg);
+}
+
+.Header-content,
+.Header-headline {
+  padding-right: 220px;
+}
+
+.Header-contacts {
+  line-height: 26px;
+  font-size: 16px;
+}
+
+.Header-contacts span {
+  font-weight: 900;
+}
+
+.Header-description {
+  padding: 30px 0px 0px;
+  font-style: italic;
+  line-height: 20px;
+}

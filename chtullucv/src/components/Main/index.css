@@ -1,0 +1,50 @@
+.Content-section {
+  display: flex;
+  margin: 25px 0px;
+  min-height: 70px;
+}
+
+.Content-section-title {
+  border-right: 2px solid;
+  width: 15%;
+  text-align: right;
+  font-weight: 900;
+}
+
+.Content-section-title,
+.Content-section-description {
+  padding: 5px 20px;
+  color: #666;
+}
+
+.Content-section-description {
+  width: 80%;
+}
+
+.Content-section-description h3 {
+  font-weight: 900;
+  padding-bottom: 10px;
+}
+
+.Content-section-info {
+  line-height: 18px;
+}
+
+.Content-info-bold {
+  font-weight: 900;
+}
+
+.Content-section-headline {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.Content-section-subtitle {
+  color: #e0dede;
+}
+
+.Content-section-list {
+  list-style: disc;
+  padding-left: 30px;
+}
