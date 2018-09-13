@@ -26,6 +26,14 @@
   padding-bottom: 10px;
 }
 
+.Content-description-container {
+  padding-bottom: 40px;
+}
+
+.Content-description-container:last-child {
+  padding-bottom: 0;
+}
+
 .Content-section-info {
   line-height: 18px;
 }
