@@ -5,6 +5,7 @@ $white: #fff;
 
 * {
   transition: all 0.3s linear;
+  font-family: monospace;
 }
 
 body {
@@ -66,6 +67,15 @@ body {
         &:last-child {
           border-right: none;
         }
+      }
+    }
+
+    .winner-container {
+      text-align: center;
+
+      p {
+        font-size: 28px;
+        font-weight: 700;
       }
     }
   }

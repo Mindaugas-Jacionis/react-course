@@ -1,29 +1,16 @@
 import React from 'react';
-import 'reset-css';
-import './style/index.css';
+import Winner from './components/Winner';
+import { WINNING_COMBOS } from '../constants';
 
-const WINNING_COMBOS = [
-  // row combos
-  [[0, 0], [0, 1], [0, 2]],
-  [[1, 0], [1, 1], [1, 2]],
-  [[2, 0], [2, 1], [2, 2]],
-
-  // columns combos
-  [[0, 0], [1, 0], [2, 0]],
-  [[0, 1], [1, 1], [2, 1]],
-  [[0, 2], [1, 2], [2, 2]],
-
-  // diagonale
-  [[0, 0], [1, 1], [2, 2]],
-  [[0, 2], [1, 1], [2, 0]],
-];
+const dimensions = 3;
+const endGame = dimensions ** 2 - 1;
+const initial = () => [...Array(dimensions)].map(() => [...Array(dimensions)]);
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    const initial = [...Array(3)].map(() => [...Array(3)]);
     this.state = {
-      gameData: initial,
+      gameData: initial(),
       turn: 0,
       players: {
         one: {
@@ -64,6 +51,23 @@ class App extends React.Component {
     return Object.values(players).find(player => player.winner);
   };
 
+  restart = () => {
+    this.setState({
+      gameData: initial(),
+      turn: 0,
+      players: {
+        one: {
+          winner: false,
+          icon: '🛸',
+        },
+        two: {
+          winner: false,
+          icon: '🚀',
+        },
+      },
+    });
+  };
+
   renderGame = () => {
     const { gameData } = this.state;
 
@@ -85,17 +89,27 @@ class App extends React.Component {
 
   renderWinner = () => {
     const winner = this.findWinner();
+    const message = winner ? `Winnner is: ${winner.icon}` : 'Nobody won :(';
 
     return (
-      <div>
-        <p>Winnner is: {winner.icon}</p>
+      <div className="winner-container">
+        <p>{message}</p>
+        <button type="button" onClick={this.restart} className="primary-button">
+          Restart
+        </button>
       </div>
     );
   };
 
   render() {
     const winner = this.findWinner();
-    return winner ? this.renderWinner() : this.renderGame();
+    const { turn } = this.state;
+
+    return winner || endGame < turn ? (
+      <Winner winner={winner} onClick={this.restart} />
+    ) : (
+      this.renderGame()
+    );
   }
 }
 
