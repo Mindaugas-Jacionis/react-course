@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function Winner(props) {
   const { winner, onClick } = props;
@@ -13,5 +14,13 @@ function Winner(props) {
     </div>
   );
 }
+
+Winner.propTypes = {
+  winner: PropTypes.shape({
+    icon: PropTypes.string.isRequired,
+    winner: PropTypes.bool.isRequired,
+  }).isRequired,
+  onClick: PropTypes.func.isRequired,
+};
 
 export default Winner;
