@@ -19,8 +19,12 @@ Winner.propTypes = {
   winner: PropTypes.shape({
     icon: PropTypes.string.isRequired,
     winner: PropTypes.bool.isRequired,
-  }).isRequired,
+  }),
   onClick: PropTypes.func.isRequired,
+};
+
+Winner.defaultProps = {
+  winner: undefined,
 };
 
 export default Winner;

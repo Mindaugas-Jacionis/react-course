@@ -1,5 +1,6 @@
 import React from 'react';
 import Winner from './components/Winner';
+import Game from './components/Game';
 import { WINNING_COMBOS } from '../constants';
 
 const dimensions = 3;
@@ -68,47 +69,14 @@ class App extends React.Component {
     });
   };
 
-  renderGame = () => {
-    const { gameData } = this.state;
-
-    return gameData.map((rowData, rowIndex) => (
-      <div className="row" key={rowIndex}>
-        {rowData.map((boxData, boxIndex) => (
-          <button
-            onClick={() => this.onClick({ row: rowIndex, box: boxIndex })}
-            className="box"
-            key={boxIndex}
-            type="button"
-          >
-            {boxData}
-          </button>
-        ))}
-      </div>
-    ));
-  };
-
-  renderWinner = () => {
-    const winner = this.findWinner();
-    const message = winner ? `Winnner is: ${winner.icon}` : 'Nobody won :(';
-
-    return (
-      <div className="winner-container">
-        <p>{message}</p>
-        <button type="button" onClick={this.restart} className="primary-button">
-          Restart
-        </button>
-      </div>
-    );
-  };
-
   render() {
     const winner = this.findWinner();
-    const { turn } = this.state;
+    const { turn, gameData } = this.state;
 
     return winner || endGame < turn ? (
       <Winner winner={winner} onClick={this.restart} />
     ) : (
-      this.renderGame()
+      <Game data={gameData} boxClick={this.onClick} />
     );
   }
 }
