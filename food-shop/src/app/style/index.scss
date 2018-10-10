@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+
+* {
+  box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif;
+}
+
+body {
+  margin: 20px 0;
+}
+/*************************Home page *****************/
+
+.App-home {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+
+  .App-card {
+    flex: 0 0 25%;
+    padding: 0 20px;
+    max-width: 25%;
+    margin-bottom: 20px;
+    position: relative;
+
+    img {
+      width: 100%;
+      display: block;
+    }
+
+    h3 {
+      text-transform: capitalize;
+    }
+
+    &__text {
+      background-color: beige;
+      padding: 40px 20px;
+    }
+
+    &__details {
+      display: flex;
+      justify-content: space-between;
+      margin: 0 -5px;
+
+      span {
+        padding: 0 5px;
+      }
+    }
+
+    &__price {
+      font-style: italic;
+    }
+  }
+}
+
+/**********************Navbar *****************************/
+
+.App-navbar {
+  display: flex;
+
+  &__item {
+    list-style-type: none;
+    padding: 0 20px;
+    justify-content: flex-end;
+    text-transform: capitalize;
+  }
+}
+
+/************************ Checkout, Favourites **************************/
+
+.App-cart,
+.App-fav {
+  margin-left: 0;
+  padding-left: 0;
+  &__container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  &__item {
+    display: flex;
+
+    &-image {
+      flex-basis: 150px;
+      max-width: 150px;
+      flex-shrink: 0;
+      flex-grow: 0;
+      margin-right: 10px;
+      img {
+        width: 100%;
+      }
+    }
+  }
+}
+
+/************************ Media queries **********************/
+
+@media all and (max-width: 512px) {
+  .App-home {
+    .App-card {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+  }
+}
+
+@media all and (max-width: 1023px) {
+  .App-home {
+    .App-card {
+      flex: 0 0 50%;
+      max-width: 50%;
+    }
+  }
+}
