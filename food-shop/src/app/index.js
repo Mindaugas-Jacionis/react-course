@@ -1,5 +1,10 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Redirect,
+  Switch,
+} from 'react-router-dom';
 import Home from './pages/Home';
 import Favorites from './pages/Favorites';
 import Checkout from './pages/Checkout';
@@ -17,7 +22,6 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      route: 'home',
       all: [],
       favorites: [],
       cart: [],
@@ -44,44 +48,19 @@ class App extends React.Component {
     this.setState({ cart: [...cart, item] });
   };
 
-  changeRoute = route => this.setState({ route });
-
-  renderContent = () => {
-    const { route, all, favorites, cart } = this.state;
-
-    switch (route) {
-      case 'home':
-        return (
-          <Home
-            data={all}
-            favorites={favorites}
-            cart={cart}
-            addToCart={this.addToCart}
-            addToFavorites={this.addToFavorites}
-          />
-        );
-      case 'favorites':
-        return <Favorites data={favorites} />;
-      case 'checkout':
-        return <Checkout data={cart} />;
-      default:
-        return <PageNotFound />;
-    }
-  };
-
   render() {
     const { all, favorites, cart, error } = this.state;
 
     return (
-      <div className="App-container">
-        <Navbar routes={ROUTES} changeRoute={this.changeRoute} />
-        {error && <h1>{error}</h1>}
-        <div>
-          <Router>
-            <React.Fragment>
+      <Router>
+        <div className="App-container">
+          <Navbar routes={ROUTES} changeRoute={this.changeRoute} />
+          {error && <h1>{error}</h1>}
+          <div>
+            <Switch>
               <Route
                 exact
-                path="/"
+                path="/home"
                 render={() => (
                   <Home
                     data={all}
@@ -92,15 +71,23 @@ class App extends React.Component {
                   />
                 )}
               />
+              <Route exact path="/" render={() => <Redirect to="/home" />} />
               <Route
                 exact
                 path="/favorites"
                 render={() => <Favorites data={favorites} />}
               />
-            </React.Fragment>
-          </Router>
+              <Route
+                exact
+                path="/checkout"
+                render={() => <Checkout data={cart} />}
+              />
+              <Route exact path="/404" component={PageNotFound} />
+              <Route path="/" render={() => <Redirect to="/404" />} />
+            </Switch>
+          </div>
         </div>
-      </div>
+      </Router>
     );
   }
 }
