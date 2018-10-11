@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Favorites from './pages/Favorites';
 import Checkout from './pages/Checkout';
@@ -69,13 +70,36 @@ class App extends React.Component {
   };
 
   render() {
-    const { error } = this.state;
+    const { all, favorites, cart, error } = this.state;
 
     return (
       <div className="App-container">
         <Navbar routes={ROUTES} changeRoute={this.changeRoute} />
         {error && <h1>{error}</h1>}
-        <div>{this.renderContent()}</div>
+        <div>
+          <Router>
+            <React.Fragment>
+              <Route
+                exact
+                path="/"
+                render={() => (
+                  <Home
+                    data={all}
+                    favorites={favorites}
+                    cart={cart}
+                    addToCart={this.addToCart}
+                    addToFavorites={this.addToFavorites}
+                  />
+                )}
+              />
+              <Route
+                exact
+                path="/favorites"
+                render={() => <Favorites data={favorites} />}
+              />
+            </React.Fragment>
+          </Router>
+        </div>
       </div>
     );
   }
