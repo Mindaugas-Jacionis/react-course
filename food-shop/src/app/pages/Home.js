@@ -1,13 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
+import shop from '../shop';
 import Card from '../components/Card';
 
 function Home(props) {
-  const { cart, data, favorites, addToCart, addToFavorites } = props;
+  const { cart, products, favorites, addToCart, addToFavorites } = props;
 
   return (
     <main className="App-home">
-      {data.map((card, index) => (
+      {products.map((card, index) => (
         <Card
           data={card}
           key={index}
@@ -23,11 +26,25 @@ function Home(props) {
 }
 
 Home.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  products: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   cart: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   favorites: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   addToCart: PropTypes.func.isRequired,
   addToFavorites: PropTypes.func.isRequired,
 };
 
-export default Home;
+const mapStateToProps = state => ({
+  cart: state.shop.cart,
+  products: state.shop.products,
+  favorites: state.shop.favorites,
+});
+
+const mapDispatchToProps = dispatch => ({
+  addToCart: product => dispatch(shop.actions.addToCart(product)),
+  addToFavorites: product => dispatch(shop.actions.addToFavorites(product)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home);

@@ -1,14 +1,15 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 function Favourites(props) {
-  const { data } = props;
+  const { favorites } = props;
 
   return (
     <div className="App-fav__container">
       <h1>List of favourite items</h1>
       <ol className="App-fav">
-        {data.map((item, index) => (
+        {favorites.map((item, index) => (
           <li key={index} className="App-fav__item">
             <div className="App-fav__item-image">
               <img src={item.image} alt={item.name} />
@@ -25,7 +26,11 @@ function Favourites(props) {
 }
 
 Favourites.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  favorites: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 
-export default Favourites;
+const mapStateToProps = state => ({
+  favorites: state.shop.favorites,
+});
+
+export default connect(mapStateToProps)(Favourites);

@@ -1,12 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-function Checkout({ data }) {
+function Checkout({ cart }) {
   return (
     <div className="App-cart__container">
       <h1>List of items to buy</h1>
       <ol className="App-cart">
-        {data.map((item, index) => (
+        {cart.map((item, index) => (
           <li key={index} className="App-cart__item">
             <div className="App-cart__item-image">
               <img src={item.image} alt={item.name} />
@@ -23,7 +24,11 @@ function Checkout({ data }) {
 }
 
 Checkout.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  cart: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 
-export default Checkout;
+const mapStateToProps = state => ({
+  cart: state.shop.cart,
+});
+
+export default connect(mapStateToProps)(Checkout);
