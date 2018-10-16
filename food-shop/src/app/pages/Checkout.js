@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import shop from '../shop';
 
 function Checkout({ cart }) {
   return (
@@ -28,7 +29,7 @@ Checkout.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  cart: state.shop.cart,
+  cart: shop.selectors.getCart(state),
 });
 
 export default connect(mapStateToProps)(Checkout);

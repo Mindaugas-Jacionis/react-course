@@ -34,9 +34,9 @@ Home.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  cart: state.shop.cart,
-  products: state.shop.products,
-  favorites: state.shop.favorites,
+  cart: shop.selectors.getCart(state),
+  products: shop.selectors.getProducts(state),
+  favorites: shop.selectors.getFavorites(state),
 });
 
 const mapDispatchToProps = dispatch => ({

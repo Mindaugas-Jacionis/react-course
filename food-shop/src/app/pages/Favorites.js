@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import shop from '../shop';
 
 function Favourites(props) {
   const { favorites } = props;
@@ -30,7 +31,7 @@ Favourites.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  favorites: state.shop.favorites,
+  favorites: shop.selectors.getFavorites(state),
 });
 
 export default connect(mapStateToProps)(Favourites);

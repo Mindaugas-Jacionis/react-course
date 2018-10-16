@@ -63,8 +63,8 @@ App.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  products: state.shop.products,
-  error: state.shop.error,
+  products: shop.selectors.getProducts(state),
+  error: shop.selectors.getError(state),
 });
 
 const mapDispatchToProps = dispatch => ({

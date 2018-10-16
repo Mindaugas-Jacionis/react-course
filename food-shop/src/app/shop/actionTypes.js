@@ -1,4 +1,4 @@
-const NAME = 'shop';
+import { NAME } from './constants';
 
 export const ADD_TO_CART = `${NAME}.ADD_TO_CART`;
 
