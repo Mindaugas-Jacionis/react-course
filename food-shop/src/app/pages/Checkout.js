@@ -28,8 +28,8 @@ Checkout.propTypes = {
   cart: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 
-const mapStateToProps = state => ({
+const enhance = connect(state => ({
   cart: shop.selectors.getCart(state),
-});
+}));
 
-export default connect(mapStateToProps)(Checkout);
+export default enhance(Checkout);

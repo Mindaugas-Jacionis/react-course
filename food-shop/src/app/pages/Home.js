@@ -33,18 +33,16 @@ Home.propTypes = {
   addToFavorites: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
-  cart: shop.selectors.getCart(state),
-  products: shop.selectors.getProducts(state),
-  favorites: shop.selectors.getFavorites(state),
-});
+const enhance = connect(
+  state => ({
+    cart: shop.selectors.getCart(state),
+    products: shop.selectors.getProducts(state),
+    favorites: shop.selectors.getFavorites(state),
+  }),
+  dispatch => ({
+    addToCart: product => dispatch(shop.actions.addToCart(product)),
+    addToFavorites: product => dispatch(shop.actions.addToFavorites(product)),
+  })
+);
 
-const mapDispatchToProps = dispatch => ({
-  addToCart: product => dispatch(shop.actions.addToCart(product)),
-  addToFavorites: product => dispatch(shop.actions.addToFavorites(product)),
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Home);
+export default enhance(Home);

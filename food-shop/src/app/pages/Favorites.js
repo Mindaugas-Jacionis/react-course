@@ -30,8 +30,8 @@ Favourites.propTypes = {
   favorites: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 
-const mapStateToProps = state => ({
+const enhance = connect(state => ({
   favorites: shop.selectors.getFavorites(state),
-});
+}));
 
-export default connect(mapStateToProps)(Favourites);
+export default enhance(Favourites);

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Route, Redirect, Switch, withRouter } from 'react-router-dom';
 
@@ -62,19 +63,18 @@ App.defaultProps = {
   error: undefined,
 };
 
-const mapStateToProps = state => ({
-  products: shop.selectors.getProducts(state),
-  error: shop.selectors.getError(state),
-});
-
-const mapDispatchToProps = dispatch => ({
-  setProducts: data => dispatch(shop.actions.setProducts(data)),
-  setProductsError: () => dispatch(shop.actions.setProductsError()),
-});
-
-export default withRouter(
+const enhance = compose(
+  withRouter,
   connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(App)
+    state => ({
+      products: shop.selectors.getProducts(state),
+      error: shop.selectors.getError(state),
+    }),
+    dispatch => ({
+      setProducts: data => dispatch(shop.actions.setProducts(data)),
+      setProductsError: () => dispatch(shop.actions.setProductsError()),
+    })
+  )
 );
+
+export default enhance(App);
