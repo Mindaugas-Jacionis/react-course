@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import shop from '../shop';
 import Card from '../components/Card';
@@ -39,10 +40,14 @@ const enhance = connect(
     products: shop.selectors.getProducts(state),
     favorites: shop.selectors.getFavorites(state),
   }),
-  dispatch => ({
-    addToCart: product => dispatch(shop.actions.addToCart(product)),
-    addToFavorites: product => dispatch(shop.actions.addToFavorites(product)),
-  })
+  dispatch =>
+    bindActionCreators(
+      {
+        addToCart: shop.actions.addToCart,
+        addToFavorites: shop.actions.addToFavorites,
+      },
+      dispatch
+    )
 );
 
 export default enhance(Home);

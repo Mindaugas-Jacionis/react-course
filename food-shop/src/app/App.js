@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { compose } from 'redux';
+import { compose, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Route, Redirect, Switch, withRouter } from 'react-router-dom';
 
@@ -70,10 +70,14 @@ const enhance = compose(
       products: shop.selectors.getProducts(state),
       error: shop.selectors.getError(state),
     }),
-    dispatch => ({
-      setProducts: data => dispatch(shop.actions.setProducts(data)),
-      setProductsError: () => dispatch(shop.actions.setProductsError()),
-    })
+    dispatch =>
+      bindActionCreators(
+        {
+          setProducts: shop.actions.setProducts,
+          setProductsError: shop.actions.setProductsError,
+        },
+        dispatch
+      )
   )
 );
 
