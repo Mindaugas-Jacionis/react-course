@@ -1,12 +1,7 @@
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
+import { createStore } from 'redux';
+import getMiddlewares from './getMiddlewares';
 import reducers from './reducers';
 
-// const loggingMiddleware = () => next => action => {
-//   console.log(action.type);
-//   return next(action);
-// };
-
-const store = createStore(reducers, applyMiddleware(thunk));
+const store = createStore(reducers, getMiddlewares);
 
 export default store;
