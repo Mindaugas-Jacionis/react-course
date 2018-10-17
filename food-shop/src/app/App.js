@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { compose, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Route, Redirect, Switch, withRouter } from 'react-router-dom';
+import { IntersectingCirclesSpinner } from 'react-epic-spinners';
 
 import Home from './pages/Home';
 import Favorites from './pages/Favorites';
@@ -15,23 +16,24 @@ import shop from './shop';
 import './style/index.css';
 
 const ROUTES = ['home', 'favorites', 'checkout'];
-const ENDPOINT =
-  'https://boiling-reaches-93648.herokuapp.com/food-shop/products';
 
 class App extends React.Component {
   componentDidMount() {
-    const { setProducts, setProductsError, products } = this.props;
+    const { getProducts } = this.props;
 
-    if (!products.length) {
-      fetch(ENDPOINT)
-        .then(response => response.json())
-        .then(all => setProducts(all))
-        .catch(() => setProductsError());
-    }
+    getProducts();
   }
 
   render() {
-    const { error } = this.props;
+    const { error, fetching } = this.props;
+
+    if (fetching) {
+      return (
+        <div className="Spinner">
+          <IntersectingCirclesSpinner color="#b25842" />
+        </div>
+      );
+    }
 
     return (
       <div className="App-container">
@@ -53,10 +55,9 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-  setProducts: PropTypes.func.isRequired,
-  setProductsError: PropTypes.func.isRequired,
-  products: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  getProducts: PropTypes.func.isRequired,
   error: PropTypes.string,
+  fetching: PropTypes.bool.isRequired,
 };
 
 App.defaultProps = {
@@ -69,15 +70,10 @@ const enhance = compose(
     state => ({
       products: shop.selectors.getProducts(state),
       error: shop.selectors.getError(state),
+      fetching: shop.selectors.isFetching(state),
     }),
     dispatch =>
-      bindActionCreators(
-        {
-          setProducts: shop.actions.setProducts,
-          setProductsError: shop.actions.setProductsError,
-        },
-        dispatch
-      )
+      bindActionCreators({ getProducts: shop.actions.getProducts }, dispatch)
   )
 );
 

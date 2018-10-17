@@ -1,17 +1,16 @@
 import * as types from './actionTypes';
 
-const DEFAULT_ERROR = 'Failed to fetch data';
+const ENDPOINT =
+  'https://boiling-reaches-93648.herokuapp.com/food-shop/products';
 
-const addToCart = data => ({ type: types.ADD_TO_CART, data });
-const addToFavorites = data => ({ type: types.ADD_TO_FAVORITES, data });
+export const addToCart = data => ({ type: types.ADD_TO_CART, data });
+export const addToFavorites = data => ({ type: types.ADD_TO_FAVORITES, data });
 
-const setProducts = data => ({ type: types.SET_PRODUCTS, data });
+export const getProducts = () => dispatch => {
+  dispatch({ type: types.GET_PRODUCTS });
 
-const setProductsError = () => ({
-  type: types.SET_PRODUCTS_ERROR,
-  data: DEFAULT_ERROR,
-});
-
-const actions = { addToCart, addToFavorites, setProducts, setProductsError };
-
-export default actions;
+  fetch(ENDPOINT)
+    .then(response => response.json())
+    .then(data => dispatch({ type: types.SET_PRODUCTS, data }))
+    .catch(() => dispatch({ type: types.SET_PRODUCTS_ERROR }));
+};
