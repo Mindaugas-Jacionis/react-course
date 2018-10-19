@@ -1,5 +1,5 @@
 {
-  "name": "starter-template",
+  "name": "github-issues",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -16,7 +16,10 @@
     "prop-types": "^15.6.2",
     "react": "^16.5.0",
     "react-dom": "^16.5.0",
+    "react-redux": "^5.0.7",
+    "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.5",
+    "redux": "^4.0.1",
     "reset-css": "^4.0.1"
   },
   "devDependencies": {
