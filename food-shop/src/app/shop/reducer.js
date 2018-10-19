@@ -10,18 +10,18 @@ const INITIAL_STATE = {
 };
 
 export default (state = INITIAL_STATE, action) => {
-  const { type, data } = action;
+  const { type, payload } = action;
 
   switch (type) {
     case types.ADD_TO_FAVORITES:
-      return { ...state, favorites: [...state.favorites, data] };
+      return { ...state, favorites: [...state.favorites, payload] };
     case types.ADD_TO_CART:
-      return { ...state, cart: [...state.cart, data] };
+      return { ...state, cart: [...state.cart, payload] };
     case types.GET_PRODUCTS:
       return { ...state, fetching: true };
-    case types.SET_PRODUCTS:
-      return { ...state, products: data, fetching: false };
-    case types.SET_PRODUCTS_ERROR:
+    case types.GET_PRODUCTS_SUCCESS:
+      return { ...state, products: payload, fetching: false };
+    case types.GET_PRODUCTS_FAILURE:
       return { ...state, error: DEFAULT_ERROR, fetching: false };
     default:
       return state;
